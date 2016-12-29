@@ -1,0 +1,140 @@
+/*
+ * Group Centric Networking
+ *
+ * Copyright (C) 2015 Massachusetts Institute of Technology
+ * All rights reserved.
+ *
+ * Authors:
+ *           Patricia Deutsch         <patricia.deutsch@ll.mit.edu>
+ *           Gregory Kuperman         <gkuperman@ll.mit.edu>
+ *           Leonid Veytser           <veytser@ll.mit.edu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation;
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+*/
+
+
+
+package GCNMessage;
+
+option optimize_for = SPEED;
+
+//**********************************************************************
+// Define format for all messages
+
+message Pull
+{
+	required uint32 gid	= 1;
+}
+
+message Unpull
+{
+	required uint32 gid	= 1;
+}
+
+message Ack
+{
+	required uint32 gid					= 1;
+	required uint32 srcnode				= 2;
+	required uint32 sequence			= 3;
+	required uint32 obligatoryrelay		= 4;
+	required uint32 probabilityofrelay	= 5;
+
+}
+
+enum AdvertiseType
+{
+  REGISTER		= 0;
+  DEREGISTER	= 1;
+}
+
+message Advertise
+{
+	required uint32 gid				= 1;
+	required uint32 srcttl			= 2;
+	optional AdvertiseType type	= 3;
+	optional uint32 srcnode			= 4;
+	optional uint32 ttl				= 5;
+	optional uint32 distance		= 6;
+	optional uint32 sequence		= 7;
+	optional uint32 interval		= 8;
+	optional uint32 probrelay		= 9;
+	optional bool   nottlregen		= 10;
+}
+
+// ***** TO DO *****
+// Define the names/values for resilience.
+// For now just using LOW, MEDIUM, HIGH as placeholders.
+// **************** 
+enum UnicastResilience
+{
+  LOW		= 0;
+  MEDIUM	= 1;
+  HIGH	= 2;
+}
+
+message UnicastHeader
+{
+	required uint32 unicastdest			= 1;
+	optional uint32 relaydistance			= 2;
+/************** These fields are deprecated *************/
+//	optional uint32 obligatoryrelay		= 3;
+//	optional uint32 probabilityofrelay	= 4;
+/********************************************************/
+	optional UnicastResilience resilience = 5;
+}
+
+message Data
+{
+	required uint32 gid					= 1;
+	optional uint32 srcttl				= 2;
+	optional uint32 srcnode				= 3;
+	optional uint32 ttl					= 4;
+	optional uint32 distance			= 5;
+	optional bool   nottlregen			= 6;
+	optional UnicastHeader uheader	= 7;
+	optional uint64 sequence			= 9;
+	required bytes  data					= 8;
+}
+
+
+//**********************************************************************
+// Define message format for messages between GCN and App
+
+message AppMessage
+{
+	repeated Pull			pull			= 1; 
+	repeated Unpull		unpull		= 2;
+	repeated Advertise	advertise	= 3;
+	repeated Data			data			= 4; 
+}
+
+
+//**********************************************************************
+// Define over the air messages sent by GCN
+
+message OTAMessage
+{
+	message Header
+	{
+		required uint32  src  = 1; // source node id
+	}
+	
+	required Header		header		= 1;
+	repeated Advertise	advertise	= 2;
+	repeated Ack			ack			= 3;
+	repeated Data			data			= 4; 
+}

@@ -1,15 +1,20 @@
-DISTRIBUTION STATEMENT A. Approved for public release: distribution unlimited.
+The Group Centric Networking (GCN) software is an instantiation of a group-centric network that enables scalable, efficient, and resilient group communications
+and was designed to enable a group of devices or users to communicate in a local region. The details of the protocol is described in [1] and has been previously
+approved for public release by DARPA.
 
-This material is based upon work supported by the Defense Advanced Research Projects Agency under Air Force Contract No. FA8721-05-C-0002 and/or FA8702-15-D-0001. 
-Any opinions, findings, conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Defense Advanced Research Projects Agency.
+The primary design goals of GCN is to be able to (1) efficiently and dynamically discover nodes that have interest in the data (i.e. group nodes) and (2) disseminate
+information between group nodes in a resilient (against packet errors, interference, and mobility) and bandwidth efficient manner. GCN achieves this through three major high level mechanisms:
+1.	Group Discovery – Efficient discovery of the local region where group members reside via a a group discovery algorithm that is able to connect group members without the use of global control information.
+2.	Tunable resiliency – Relay nodes are activated such that the local region is sufficiently “covered” in data by having a tunable number of redundant data relays. This allows for resiliency
+   towards both packet loss and mobility without the need for the constant exchange of control information. The number of activated relay nodes self-adjusts in response to real-time channel conditions. 
+3.	Targeted flooding – Data can be efficiently and resiliently sent between sets of group members.
 
-© 2016 Massachusetts Institute of Technology.
+The GCN software package includes:
+•	The main GCN code in the /gcn/src folder 
+•	GCN release notes and sample GCN scenarios with NS3 wifi and LL simple-wireless tests in the ns3/ folder
 
-The software/firmware is provided to you on an As-Is basis
 
-Delivered to the US Government with Unlimited Rights, as defined in DFARS Part 252.227-7013 or 7014 (Feb 2014). 
-Notwithstanding any copyright notice, U.S. Government rights in this work are defined by DFARS 252.227-7013 or DFARS 252.227-7014 as detailed above. 
-Use of this work other than as specifically authorized by the U.S. Government may violate any copyrights that exist in this work.
+[1] G. Kuperman, J. Sun, B.-N. Cheng, P. Deutsch, and A. Narula-Tam, “Group Centric Networking: A New Approach for Wireless Multi-Hop Networking to Enable the Internet of Things,” in arXiv, 2015. 
 
 
 GCN_RELEASE has the following contents:

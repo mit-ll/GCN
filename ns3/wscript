@@ -1,0 +1,47 @@
+#
+# Group Centric Networking
+#
+# Copyright (C) 2015 Massachusetts Institute of Technology
+# All rights reserved.
+#
+# Authors:
+#           Patricia Deutsch         <patricia.deutsch@ll.mit.edu>
+#           Gregory Kuperman         <gkuperman@ll.mit.edu>
+#           Leonid Veytser           <veytser@ll.mit.edu>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation;
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+import ns3waf
+import os
+
+def configure(conf): 
+    ns3waf.check_modules(conf, ['core', 'internet', 'mobility', 'olsr', 'aodv', 'wifi'], mandatory = True)
+
+def build(bld):
+	bld.build_a_script('dce', needed = ['core', 'internet', 'dce', 'mobility', 'olsr', 'aodv', 'wifi'],
+				  target='bin/GCN_network_tests',
+				  cxxflags=['-std=c++0x'],
+				  source=['GCN_network_tests_Wifi.cc'])
+				  
+#	bld.build_a_script('dce', needed = ['core', 'internet', 'dce', 'mobility', 'olsr', 'aodv', 'wifi', 'simple-wireless'],
+#				  target='bin/GCN_network_tests',
+#				  cxxflags=['-std=c++0x'],
+#				  source=['GCN_network_tests_LLSW.cc'])
+
