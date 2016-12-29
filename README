@@ -7,16 +7,16 @@ information between group nodes in a resilient (against packet errors, interfere
 
 GCN achieves this through three major high level mechanisms:
 
-1.	Group Discovery – Efficient discovery of the local region where group members reside via a a group discovery algorithm that is able to connect group members without the use of global control information.
+1.Group Discovery – Efficient discovery of the local region where group members reside via a a group discovery algorithm that is able to connect group members without the use of global control information.
 
-2.	Tunable resiliency – Relay nodes are activated such that the local region is sufficiently “covered” in data by having a tunable number of redundant data relays. This allows for resiliency
+2.Tunable resiliency – Relay nodes are activated such that the local region is sufficiently “covered” in data by having a tunable number of redundant data relays. This allows for resiliency
    towards both packet loss and mobility without the need for the constant exchange of control information. The number of activated relay nodes self-adjusts in response to real-time channel conditions. 
    
-3.	Targeted flooding – Data can be efficiently and resiliently sent between sets of group members.
+3.Targeted flooding – Data can be efficiently and resiliently sent between sets of group members.
 
 The GCN software package includes:
-•	The main GCN code in the /gcn/src folder 
-•	GCN release notes and sample GCN scenarios with NS3 wifi and LL simple-wireless tests in the ns3/ folder
+• The main GCN code in the /gcn/src folder 
+• GCN release notes and sample GCN scenarios with NS3 wifi and LL simple-wireless tests in the ns3/ folder
 
 
 [1] G. Kuperman, J. Sun, B.-N. Cheng, P. Deutsch, and A. Narula-Tam, “Group Centric Networking: A New Approach for Wireless Multi-Hop Networking to Enable the Internet of Things,” in arXiv, 2015. 
