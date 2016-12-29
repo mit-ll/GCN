@@ -3,10 +3,15 @@ and was designed to enable a group of devices or users to communicate in a local
 approved for public release by DARPA.
 
 The primary design goals of GCN is to be able to (1) efficiently and dynamically discover nodes that have interest in the data (i.e. group nodes) and (2) disseminate
-information between group nodes in a resilient (against packet errors, interference, and mobility) and bandwidth efficient manner. GCN achieves this through three major high level mechanisms:
+information between group nodes in a resilient (against packet errors, interference, and mobility) and bandwidth efficient manner. 
+
+GCN achieves this through three major high level mechanisms:
+
 1.	Group Discovery – Efficient discovery of the local region where group members reside via a a group discovery algorithm that is able to connect group members without the use of global control information.
+
 2.	Tunable resiliency – Relay nodes are activated such that the local region is sufficiently “covered” in data by having a tunable number of redundant data relays. This allows for resiliency
    towards both packet loss and mobility without the need for the constant exchange of control information. The number of activated relay nodes self-adjusts in response to real-time channel conditions. 
+   
 3.	Targeted flooding – Data can be efficiently and resiliently sent between sets of group members.
 
 The GCN software package includes:
